@@ -18,6 +18,7 @@ public class MenuModule {
             System.out.println("3. List all books in the library");
             System.out.println("4. List your borrowed books");
             System.out.println("5. List your favorite Books");
+            System.out.println("6. Remove a book from the library");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
 
@@ -41,10 +42,11 @@ public class MenuModule {
                 case 5:
                     listFavoriteBooks();
                     break;
+                case 6:
+                    removeBook();
                 case 0:
                     System.out.println("Bye Bye!");
                     exit = true;
-                    scanner.close();
                     break;
                 default:
                     System.out.println("Invalid choice, try again");
@@ -129,8 +131,14 @@ public class MenuModule {
             System.out.println((i + 1) + ". " + matchedBooks.get(i));
         }
     
-        String interactionPrompt = (interaction.equals("borrow")) ? "\nEnter the book number to borrow it or '0' to go back" : "\nEnter the book number to add it to favorites or '0' to go back";
-        System.out.println(interactionPrompt);
+        if (interaction.equals("borrow")) {
+            System.out.println("\nEnter the book number to borrow it or '0' to go back");
+        } else if (interaction.equals("favorite")) {
+            System.out.println("\nEnter the book number to add it to favorites or '0' to go back");
+        } else {
+            System.out.println("\nEnter the book number to remove it from the library or '0' to go back");
+        }
+
         boolean back = false;
         while (!back) {
             System.out.print("Enter your choice: ");
@@ -149,7 +157,7 @@ public class MenuModule {
                         System.out.println("You have already borrowed this book!");
                     }
                     back = true;
-                } else {
+                } else if (interaction.equals("favorite")) {
                     if (!library.getFavoriteBooks().contains(bookToInteract)) {
                         library.addBookToFavorites(bookToInteract);
                         System.out.println("You have added to favorites: " + bookToInteract);
@@ -157,6 +165,11 @@ public class MenuModule {
                     } else {
                         System.out.println("You have already added this book to favorites!");
                     }
+                    back = true;
+                } else {
+                    System.out.println("You have removed: " + bookToInteract);
+                    library.removeBook(bookToInteract);
+                    System.out.println();
                     back = true;
                 }
             } else if (choice == 0) {
@@ -193,6 +206,14 @@ public class MenuModule {
 
         System.out.print("\nPress any key to return ");
         scanner.nextLine();
+        printMainMenu();
+    }
+
+    private static void removeBook() {
+        List<Book> books = library.getBooks();
+
+        displayAndInteract(books, "remove");
+        
         printMainMenu();
     }
     

@@ -38,4 +38,8 @@ public class Library {
     public void addBookToFavorites(Book book) {
         favoriteBooks.add(book);
     }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
 }
