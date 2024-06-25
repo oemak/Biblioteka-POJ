@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MenuModule {
     private static Scanner scanner = new Scanner(System.in);
-    private static Library library = new Library();
+    public static Library library = new Library();
 
     public static void printMainMenu() {
         System.out.println("\nWelcome to the Library!");
