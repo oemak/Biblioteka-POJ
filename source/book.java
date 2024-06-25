@@ -9,8 +9,16 @@ public class Book {
         this.author = author;
     }
 
+    public String getAuthor() {
+        return author;
+    } 
+
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
-        return "Author: " + author + " | Title: " + title;
+        return author + " - \"" + title + "\"";
     }
 }

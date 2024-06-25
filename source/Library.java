@@ -10,6 +10,8 @@ public class Library {
 
     public Library() {
         this.books = new ArrayList<>();
+        this.borrowedBooks = new ArrayList<>();
+        this.favoriteBooks = new ArrayList<>();
     }
 
     public List<Book> getBooks() {
@@ -29,15 +31,11 @@ public class Library {
     }
 
     public void borrowBook(Book book) {
-        if (books.contains(book) && !borrowedBooks.contains(book)) {
-            books.remove(book);
-            borrowedBooks.add(book);
-        }
+        borrowedBooks.add(book);
+        books.remove(book);
     }
 
     public void addBookToFavorites(Book book) {
-        if (books.contains(book) && !favoriteBooks.contains(book)) {
-            favoriteBooks.add(book);
-        }
+        favoriteBooks.add(book);
     }
 }
